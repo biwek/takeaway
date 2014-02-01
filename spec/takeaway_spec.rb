@@ -16,19 +16,36 @@ describe Takeaway do
 		end
 	end
 
-	context "Order:" do 
-		it "take an order and return its total" do 
+	context "Calculate Order:" do 
+
+		it "calculates an order with a single dish" do 
 			mishmash = Takeaway.new
-			mishmash.order("pasta", 3)
-			expect(mishmash.total).to eq(21.0)
+			expect(mishmash.calc_order(["pasta"], [3])).to eq(21.0)
 		end
 
-		it "takes two dish order and return its total" do 
+		it "calculates an order with two dish" do 
 			mishmash = Takeaway.new
-			mishmash.order("pasta", 3)
-			mishmash.order("dumplings", 2)
-			expect(mishmash.total).to eq(29.0)
+			expect(mishmash.calc_order(["pasta", "dumplings"], [3, 2])).to eq(29.0)
 		end
+	end
+
+	context "Placing Order:" do
+
+		it "takes an order with a list of single dish" do 
+			mishmash = Takeaway.new
+			expect(mishmash.place_order(["pasta"], [3], 21.0)).to be_true
+		end
+
+		it "takes an order with a list of two dish" do 
+			mishmash = Takeaway.new
+			expect(mishmash.place_order(["pasta", "burger"], [2, 4], 34.0)).to be_true
+		end
+
+		it "raises an error if total is not correct" do 
+			mishmash = Takeaway.new
+			expect{mishmash.place_order(["pasta", "burger"], [2, 4], 30.0)}.to raise_error("Oops, Sorry The Sum Is NOT Correct!")
+		end
+
 	end
 
 

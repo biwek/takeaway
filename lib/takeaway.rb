@@ -16,8 +16,18 @@ class Takeaway
 		menu.map {|dish| dish[:dish]}
 	end
 
-	def order(dish, quantity)
-		@total << (menu.select {|m| m[:dish] == dish}.map {|d| d.fetch(:price)}.join.to_f) * quantity
+	def calc_order(dishes, quantities)
+		dishes.each.with_index do |d, i|
+			@total << menu.select {|m| m[:dish] == d}.map {|p| p.fetch(:price)}.join.to_f * quantities[i].to_f
+		end
+		return total
+	end
+
+	def place_order(dishes, quantities, sum)
+		calc_order(dishes, quantities)
+		raise "Oops, Sorry The Sum Is NOT Correct!" if sum != total
+		true
+		# else send text to customer if sum == total ("Thank you! Your order was placed and will be delivered before (1 hour from now)")
 	end
 
 	def total
