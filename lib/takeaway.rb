@@ -26,28 +26,25 @@ class Takeaway
 	def place_order(dishes, quantities, sum)
 		calc_order(dishes, quantities)
 		raise "Oops, Sorry The Sum Is NOT Correct!" if sum != total
-		true
-		# else send text to customer if sum == total ("Thank you! Your order was placed and will be delivered before (1 hour from now)")
+		send_text
 	end
 
 	def total
 		@total.inject(:+)
 	end
 
+	def send_text
+		account_sid = 'AC6f685ed5444a892d3e40a55831b21487' 
+		auth_token = '4c90945f99c135471866df1f7080bfef' 
+		 
+		@client = Twilio::REST::Client.new account_sid, auth_token 
 
-# put your own credentials here, get them at twilio.com
-# account_sid = 'ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
-# auth_token = 'yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy'
-
-# # set up a client to talk to the Twilio REST API
-# client = Twilio::REST::Client.new account_sid, auth_token
-
-# # send an sms
-# client.account.sms.messages.create(
-#   :from => '+14159341234',
-#   :to => '+16105557069',
-#   :body => 'Hey there!')
-
+		@client.account.messages.create(
+		  :from => '+441980322022',
+		  :to => '+447540573347',
+		  :body => 'Thank you! Your order was placed and will be delivered before (1 hour from now)'
+		)
+	end
 
 
 	#### Extra Stuff ####

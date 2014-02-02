@@ -1,7 +1,5 @@
 require_relative '../lib/takeaway'
 
-# => +441988222016
-
 describe Takeaway do 
 	
 	context "Menu:" do 
