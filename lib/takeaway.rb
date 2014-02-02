@@ -2,6 +2,9 @@ require 'twilio-ruby'
 
 class Takeaway
 
+	ACCOUNT_SID = 'AC6f685ed5444a892d3e40a55831b21487'
+	AUTH_TOKEN = '4c90945f99c135471866df1f7080bfef'
+
 	MENU = [{dish: "pasta", price: 7.00}, {dish: "dumplings", price: 4.00}, {dish: "burger", price: 5.00}]
 
 	def initialize
@@ -34,36 +37,21 @@ class Takeaway
 	end
 
 	def send_text
-		account_sid = 'AC6f685ed5444a892d3e40a55831b21487' 
-		auth_token = '4c90945f99c135471866df1f7080bfef' 
+		account_sid = ACCOUNT_SID
+		auth_token = AUTH_TOKEN  
 		 
 		@client = Twilio::REST::Client.new account_sid, auth_token 
 
 		@client.account.messages.create(
 		  :from => '+441980322022',
 		  :to => '+447540573347',
-		  :body => 'Thank you! Your order was placed and will be delivered before ' + order_time
+		  :body => 'Thank you! Your order was placed and will be delivered before ' + delivery_time
 		)
 	end
 
-	def order_time
+	def delivery_time
 		t = Time.new
 		t.localtime("+01:00").strftime("%H:%M")
 	end
-
-
-	#### Extra Stuff ####
-	# def interactive_menu
-	# 	loop do 
-	# 		puts "Hey mate, here is the menu"
-	# 		list_dishes.each {|dish| puts dish}
-	# 		puts "press 0 to exit"
-	# 		input = gets.chomp
-	# 		if input == "0"
-	# 			exit
-	# 		end
-	# 	end
-	# end
-
 
 end
