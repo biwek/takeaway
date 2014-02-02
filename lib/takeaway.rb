@@ -25,8 +25,8 @@ class Takeaway
 
 	def place_order(dishes, quantities, sum)
 		calc_order(dishes, quantities)
-		raise "Oops, Sorry The Sum Is INCORRECT!" if sum != total
-		send_text
+		raise "Oops, Sorry The Sum Is INCORRECT!" if sum.to_f != total
+		send_text && @total = []
 	end
 
 	def total

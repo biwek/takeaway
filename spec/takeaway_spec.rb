@@ -31,12 +31,15 @@ describe Takeaway do
 
 		it "takes an order with a list of single dish" do 
 			mishmash = Takeaway.new
-			expect{mishmash.place_order(["pasta"], [3], 21.0)}.not_to raise_error
+			mishmash.stub(:send_text).and_return(true)
+			expect(mishmash.place_order(["pasta"], [3], 21.0)).to be_true
+			expect(mishmash.place_order(["pasta"], [3], 21.0)).to be_true
 		end
 
 		it "takes an order with a list of two dish" do 
 			mishmash = Takeaway.new
-			expect{mishmash.place_order(["pasta", "burger"], [2, 4], 34.0)}.not_to raise_error
+			mishmash.stub(:send_text).and_return(true)
+			expect(mishmash.place_order(["pasta", "burger"], [2, 4], 34.0)).to be_true
 		end
 
 		it "raises an error if total is not correct" do 
