@@ -48,7 +48,7 @@ class Takeaway
 
 	def order_time
 		t = Time.new
-		t.localtime("+01:00").to_s
+		t.localtime("+01:00").strftime("%H:%M")
 	end
 
 
