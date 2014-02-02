@@ -25,7 +25,7 @@ class Takeaway
 
 	def place_order(dishes, quantities, sum)
 		calc_order(dishes, quantities)
-		raise "Oops, Sorry The Sum Is NOT Correct!" if sum != total
+		raise "Oops, Sorry The Sum Is INCORRECT!" if sum != total
 		send_text
 	end
 
@@ -42,8 +42,13 @@ class Takeaway
 		@client.account.messages.create(
 		  :from => '+441980322022',
 		  :to => '+447540573347',
-		  :body => 'Thank you! Your order was placed and will be delivered before (1 hour from now)'
+		  :body => 'Thank you! Your order was placed and will be delivered before ' + order_time
 		)
+	end
+
+	def order_time
+		t = Time.new
+		t.localtime("+01:00").to_s
 	end
 
 

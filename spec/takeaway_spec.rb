@@ -41,7 +41,7 @@ describe Takeaway do
 
 		it "raises an error if total is not correct" do 
 			mishmash = Takeaway.new
-			expect{mishmash.place_order(["pasta", "burger"], [2, 4], 30.0)}.to raise_error("Oops, Sorry The Sum Is NOT Correct!")
+			expect{mishmash.place_order(["pasta", "burger"], [2, 4], 30.0)}.to raise_error("Oops, Sorry The Sum Is INCORRECT!")
 		end
 
 	end
